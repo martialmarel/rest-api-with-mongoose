@@ -1,6 +1,6 @@
 /* global request:false, expect:false */
 
-describe('Routes: Accounts', () => {
+describe('Routes: Index', () => {
 	describe('GET /', () => {
 		it('returns the API status', done => {
 			request.get('/')
