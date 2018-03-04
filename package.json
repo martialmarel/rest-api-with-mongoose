@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "test": "NODE_ENV=test",
+    "clean": "rm -rf node_modules",
     "lint": "eslint --ext .js ."
   },
   "keywords": [],
@@ -16,11 +17,12 @@
     "error-handler": "^1.0.0",
     "errorhandler": "^1.5.0",
     "express": "^4.16.2",
-    "mongoose": "^5.0.6",
+    "mongoose": "^5.0.8",
     "morgan": "^1.9.0"
   },
   "devDependencies": {
-    "eslint": "^4.16.0",
-    "nodemon": "^1.14.11"
+    "eslint": "^4.18.2",
+    "nodemon": "^1.17.1",
+    "stack-trace": "0.0.10"
   }
 }
