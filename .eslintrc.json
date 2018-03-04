@@ -6,7 +6,8 @@
         "require"   : false,
         "module"    : false,
         "global"    : false,
-        "process"    : false,
+		"process"	: false,
+		"console"	: false,
         /* MOCHA */
         "describe"   : false,
         "it"         : false,
