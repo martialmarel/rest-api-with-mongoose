@@ -2,7 +2,8 @@ const config = {
 	app: {
 		port: 3001,
 		logger: {
-			format: 'dev' // combined, common, dev, short, tiny
+			enable: false,
+			format: 'tiny' // combined, common, dev, short, tiny
 		}
 	},
 	db: {

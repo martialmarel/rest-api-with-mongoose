@@ -16,7 +16,9 @@ const port = process.env.PORT || config.app.port;
 
 const app = express();
 app.use(bodyParser.json());
-app.use(logger(config.app.logger.format));
+if (config.app.logger.enable) {
+	app.use(logger(config.app.logger.format));
+}
 app.use(errorhandler());
 
 const routes = require('./routes');
