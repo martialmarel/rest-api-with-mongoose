@@ -11,7 +11,7 @@ mongoose.connect(connectionString);
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', () => {
-	if (app.get('env') !== 'test') {
+	if (process.env.NODE_ENV !== 'test') {
 		console.log('Mongoose connected');
 	}
 });
