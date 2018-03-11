@@ -10,7 +10,7 @@ describe('Routes: Accounts', () => {
 	});
 
 	describe('GET /', () => {
-		it('Fist call return a empty array of Account', done => {
+		it('First call return a empty array of Account', done => {
 			request.get('/accounts')
 				.end((err, res) => {
 					expect(res.status).to.equal(200);
