@@ -11,7 +11,9 @@ mongoose.connect(connectionString);
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', () => {
-	console.log('Mongoose connected');
+	if (app.get('env') !== 'test') {
+		console.log('Mongoose connected');
+	}
 });
 mongoose.connection.on('error', (err) => {
 	console.log('Mongoose connection error: ' + err);
