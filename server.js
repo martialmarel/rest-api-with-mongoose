@@ -40,11 +40,12 @@ app.use((err, req, res, next) => {
 		res.status(401);
 		res.json({ 'message': err.name + ': ' + err.message });
 	}
+
 	next(err);
 });
 
 // Error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
 	const trace = stackTrace.parse(err);
 
 	let errorResponse = {
@@ -53,13 +54,19 @@ app.use((err, req, res) => {
 		stack: trace
 	};
 
-	// no stacktraces leaked to user in  production only providing error in development
-	const finalResponse = req.app.get('env') === 'development' ? errorResponse : {};
+	var finalResponse = errorResponse;
 
-	console.error(finalResponse.message); // eslint-disable-line no-console
+	// no stacktraces leaked to user in  production only providing error in development
+	if (req.app.get('env') !== 'development') {
+		finalResponse = err.publicData ? err.publicData : {};
+	} else {
+		console.error(finalResponse); // eslint-disable-line no-console
+	}
 
 	res.status(err.status || 500)
 		.json(finalResponse);
+
+	next(err);
 });
 
 
