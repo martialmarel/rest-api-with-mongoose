@@ -32,6 +32,11 @@ accountRouter.get('/:id', (req, res) => {
 accountRouter.post('/', (req, res) => {
 	let account = new Account(req.body);
 
+	let errorsValidation = account.validateSync();
+	if ( errorsValidation ) {
+		return res.status(412).send({ errors: errorsValidation.errors });
+	}
+
 	account.save((err, result) => {
 		if (err) { throw(err); }
 
@@ -43,8 +48,10 @@ accountRouter.put('/:id', (req, res) => {
 	let accountId = req.params.id;
 	handleInvalidID(accountId);
 
-	let balance = req.body.balance; // TODO check balance is defined in request
-
+	let balance = parseFloat(req.body.balance);
+	if (typeof balance !== 'number' || isNaN(balance)) {
+		return res.status(412).send({ errors: {balance : { message: 'Balance is required and and must be a number'} } });
+	}
 
 	Account.findByIdAndUpdate(accountId, { balance : balance }, { new: true},  (err, account) => {
 		if (err) { throw(err); }
@@ -76,6 +83,7 @@ function handleInvalidID(id) { // TODO create middleware for global project ???
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		let err = new Error(`Invalid Object ID : ${id}`);
 		err.status = 412;
+		err.publicData = { errors: {id : { message: '`Invalid Object ID : ${id}`'} } };
 
 		throw(err);
 	}
