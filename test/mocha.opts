@@ -1,4 +1,4 @@
 --require test/helpers
 --reporter spec
---slow 5000
+--slow 1000
 --exit
