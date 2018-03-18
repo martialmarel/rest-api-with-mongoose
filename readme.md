@@ -177,7 +177,7 @@ Le projet propose les différentes commandes :
     npm run test : lance l'exécution de la suite de tests
 	
 	npm run lint : exécute le contrôle de syntaxe sur les fichiers JS, afin de valider leur conformité au standard définit dans le fichier .eslintrc.json
-    
+	
 	npm run clean : supprime le répertoire node_modules du projet
 
 
