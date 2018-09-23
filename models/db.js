@@ -4,9 +4,11 @@ const mongoose = require('mongoose');
 
 const config = require('../config');
 
-const { db: { host, port, name } } = config;
-const connectionString = `mongodb://${host}:${port}/${name}`;
-
+const { db: { host, port, name, user, password } } = config;
+let connectionString = `mongodb://${host}:${port}/${name}`;
+if (user && password) {
+	connectionString = `mongodb://${user}:${password}@${host}:${port}/${name}`;
+}
 mongoose.connect(connectionString);
 
 // CONNECTION EVENTS
